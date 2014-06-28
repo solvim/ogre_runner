@@ -48,20 +48,26 @@ void ogre_runner::createScene(void)
 
 	// bua til plan
     Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-	//Ogre::Plane plane1(Ogre::Vector3::UNIT_X, 0);
-
+	Ogre::Plane planeA(Ogre::Vector3::UNIT_X, -750);
  
     Ogre::MeshManager::getSingleton().createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-        plane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+        plane, 1500, 1500, 200, 200, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 
-	//Ogre::MeshManager::getSingleton().createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-    //    plane1, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+	Ogre::MeshManager::getSingleton().createPlane("wall", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+        planeA, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
  
     Ogre::Entity* entGround = mSceneMgr->createEntity("GroundEntity", "ground");
     mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entGround);
+
+	Ogre::Entity* entWall = mSceneMgr->createEntity("WallEntity", "wall");
+    mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entWall);
+ 
  
     entGround->setMaterialName("Examples/Rockwall");
     entGround->setCastShadows(false);
+
+	entWall->setMaterialName("Examples/Rockwall");
+    entWall->setCastShadows(false);
 
 	// setja inn skybox
 	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox", 500);

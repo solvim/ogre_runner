@@ -1,4 +1,4 @@
-﻿Build started 6/28/2014 1:40:56 PM.
+﻿Build started 6/28/2014 2:13:43 PM.
      1>Project "C:\Users\gummi_000\Documents\GitHub\ogre_runner\ogre_runner\ogre_runner\ogre_runner.vcxproj" on node 2 (build target(s)).
      1>InitializeBuildStatus:
          Creating "obj\Debug\ogre_runner.unsuccessfulbuild" because "AlwaysCreate" was specified.
@@ -3425,4 +3425,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:10.37
+Time Elapsed 00:00:11.01
