@@ -48,10 +48,14 @@ void ogre_runner::createScene(void)
 
 	// bua til plan
     Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
+	//Ogre::Plane plane1(Ogre::Vector3::UNIT_X, 0);
 
  
     Ogre::MeshManager::getSingleton().createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
         plane, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+
+	//Ogre::MeshManager::getSingleton().createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    //    plane1, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
  
     Ogre::Entity* entGround = mSceneMgr->createEntity("GroundEntity", "ground");
     mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entGround);
@@ -63,7 +67,7 @@ void ogre_runner::createScene(void)
 	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox", 500);
 
     // Set ambient light
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.2f, 0.2f, 0.2f));
+    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
 
     // Create a light
     Ogre::Light* l = mSceneMgr->createLight("MainLight");
