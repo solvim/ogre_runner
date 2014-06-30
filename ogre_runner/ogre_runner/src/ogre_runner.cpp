@@ -44,8 +44,14 @@ void ogre_runner::createScene(void)
 	Ogre::SceneNode* headNode2 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "ninja", Ogre::Vector3( 100, 0, 0 ) );
 	headNode2->attachObject( ninja );
 	// snua ninjuni
-	headNode2->yaw( Ogre::Degree( 90 ));
+	//teleport
+	if(headNode2->getPosition() == Ogre::Vector3(100, 0, 0))
+	{
+		headNode2->translate(500, 0, 0);
+	}
 
+	//headNode2->yaw( Ogre::Degree( 90 ));
+	
 	// bua til plan
     Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
 	Ogre::Plane planeA(Ogre::Vector3::UNIT_X, -750);
