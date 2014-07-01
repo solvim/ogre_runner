@@ -33,53 +33,137 @@ void ogre_runner::createScene(void)
     mSceneMgr->setAmbientLight(Ogre::ColourValue(0, 0, 0));
     mSceneMgr->setShadowTechnique(Ogre::SHADOWTYPE_STENCIL_ADDITIVE);
 	
-	//setja inn ninju
-    Ogre::Entity* entNinja = mSceneMgr->createEntity("Ninja", "ninja.mesh");
-    entNinja->setCastShadows(true);
-    mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entNinja);
-
-	// setja inn ninju
-	Ogre::Entity* ninja = mSceneMgr->createEntity( "ninja", "penguin.mesh" );
-	// ninjan settur a chord 100,0,0
-	Ogre::SceneNode* headNode2 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "ninja", Ogre::Vector3( 100, 0, 0 ) );
-	headNode2->attachObject( ninja );
-	// snua ninjuni
-	//teleport
-	if(headNode2->getPosition() == Ogre::Vector3(100, 0, 0))
-	{
-		headNode2->translate(500, 0, 0);
-	}
-
-	//headNode2->yaw( Ogre::Degree( 90 ));
 	
-	// bua til plan
+	Ogre::Entity* ninjaEntity = mSceneMgr->createEntity("Ninja", "razor.mesh");
+	Ogre::SceneNode *node = mSceneMgr->getRootSceneNode()->createChildSceneNode("NinjaNode", Ogre::Vector3(2000, 0, 2000));
+	node->attachObject(ninjaEntity);
+	//mSceneMgr->getSceneNode("NinjaNode")->yaw(Ogre::Degree(180));
+
+
+
+	//=========================================================================================================================
+	//================================   SETJA INN TELEPORTS ==================================================================
+
+	//teleports nidri haegri
+
+	Ogre::Entity* tele = mSceneMgr->createEntity( "tele", "cube.mesh" );
+	Ogre::SceneNode* teleNode = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele", Ogre::Vector3( 2000, 0, 1500 ) );
+	teleNode->attachObject( tele );
+
+	Ogre::Entity* tele2 = mSceneMgr->createEntity( "tele2", "cube.mesh" );
+	Ogre::SceneNode* teleNode2 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele2", Ogre::Vector3( 2000, 0, 2500 ) );
+	teleNode2->attachObject( tele2 );
+
+
+	//--------------------------------
+	// teleports nidri vinstri
+
+	Ogre::Entity* tele4 = mSceneMgr->createEntity( "tele4", "cube.mesh" );
+	Ogre::SceneNode* teleNode4 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele4", Ogre::Vector3( -2000, 0, 1500 ) );
+	teleNode4->attachObject( tele4 );
+
+	Ogre::Entity* tele5 = mSceneMgr->createEntity( "tele5", "cube.mesh" );
+	Ogre::SceneNode* teleNode5 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele5", Ogre::Vector3( -2000, 0, 2500 ) );
+	teleNode5->attachObject( tele5 );
+
+
+	//----------------------------------
+	// teleports uppi haegri
+	
+	Ogre::Entity* tele7 = mSceneMgr->createEntity( "tele7", "cube.mesh" );
+	Ogre::SceneNode* teleNode7 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele7", Ogre::Vector3( 2000, 0, -1500 ) );
+	teleNode7->attachObject( tele7 );
+
+	Ogre::Entity* tele8 = mSceneMgr->createEntity( "tele8", "cube.mesh" );
+	Ogre::SceneNode* teleNode8 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele8", Ogre::Vector3( 2000, 0, -2500 ) );
+	teleNode8->attachObject( tele8 );
+
+
+	//--------------------------------------
+	// teleports uppi vinstri
+
+	Ogre::Entity* tele10 = mSceneMgr->createEntity( "tele10", "cube.mesh" );
+	Ogre::SceneNode* teleNode10 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele10", Ogre::Vector3( -2000, 0, -1500 ) );
+	teleNode10->attachObject( tele10 );
+
+	Ogre::Entity* tele11 = mSceneMgr->createEntity( "tele11", "cube.mesh" );
+	Ogre::SceneNode* teleNode11 = mSceneMgr->getRootSceneNode()->createChildSceneNode( "tele11", Ogre::Vector3( -2000, 0, -2500 ) );
+	teleNode11->attachObject( tele11 );
+
+
+	// ======================================================================================================================
+	//===============================       HER VERDA BUIN TIL PLONIN =======================================================
+
+	// bua til plan 
     Ogre::Plane plane(Ogre::Vector3::UNIT_Y, 0);
-	Ogre::Plane planeA(Ogre::Vector3::UNIT_X, -750);
  
     Ogre::MeshManager::getSingleton().createPlane("ground", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
         plane, 1500, 1500, 200, 200, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
 
-	Ogre::MeshManager::getSingleton().createPlane("wall", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
-        planeA, 1500, 1500, 20, 20, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
- 
     Ogre::Entity* entGround = mSceneMgr->createEntity("GroundEntity", "ground");
     mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entGround);
-
-	Ogre::Entity* entWall = mSceneMgr->createEntity("WallEntity", "wall");
-    mSceneMgr->getRootSceneNode()->createChildSceneNode()->attachObject(entWall);
  
- 
-    entGround->setMaterialName("Examples/Rockwall");
+    entGround->setMaterialName("Examples/Finish");
     entGround->setCastShadows(false);
 
-	entWall->setMaterialName("Examples/Rockwall");
-    entWall->setCastShadows(false);
+	// bua til plan a  ============================================================================
+	Ogre::Plane planeA(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane("Aplane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    plane, 1500, 1500, 200, 200, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+
+	Ogre::Entity* entPlaneA = mSceneMgr->createEntity("APlaneEntity", "Aplane");
+	Ogre::SceneNode* planeNodeA = mSceneMgr->getRootSceneNode()->createChildSceneNode( "APlaneEntity", Ogre::Vector3( 2000, 0, 2000 ) );
+	planeNodeA->attachObject( entPlaneA );
+
+	entPlaneA->setMaterialName("Examples/Rockwall");
+    entPlaneA->setCastShadows(false);
+
+	// bua til plan b =============================================================================================
+	Ogre::Plane planeB(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane("Bplane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    plane, 1500, 1500, 200, 200, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+
+	Ogre::Entity* entPlaneB = mSceneMgr->createEntity("BPlaneEntity", "Bplane");
+	Ogre::SceneNode* planeNodeB = mSceneMgr->getRootSceneNode()->createChildSceneNode( "BPlaneEntity", Ogre::Vector3( -2000, 0, -2000 ) );
+	planeNodeB->attachObject( entPlaneB );
+
+	entPlaneB->setMaterialName("Examples/Rockwall");
+    entPlaneB->setCastShadows(false);
+
+	// bua til plan c =============================================================================================
+	Ogre::Plane planeC(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane("Cplane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    plane, 1500, 1500, 200, 200, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+
+	Ogre::Entity* entPlaneC = mSceneMgr->createEntity("CPlaneEntity", "Cplane");
+	Ogre::SceneNode* planeNodeC = mSceneMgr->getRootSceneNode()->createChildSceneNode( "CPlaneEntity", Ogre::Vector3( -2000, 0, 2000 ) );
+	planeNodeC->attachObject( entPlaneC );
+
+	entPlaneC->setMaterialName("Examples/Rockwall");
+    entPlaneC->setCastShadows(false);
+
+	// bua til plan d =============================================================================================
+	Ogre::Plane planeD(Ogre::Vector3::UNIT_Y, 0);
+
+	Ogre::MeshManager::getSingleton().createPlane("Dplane", Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME,
+    plane, 1500, 1500, 200, 200, true, 1, 5, 5, Ogre::Vector3::UNIT_Z);
+
+	Ogre::Entity* entPlaneD = mSceneMgr->createEntity("DPlaneEntity", "Dplane");
+	Ogre::SceneNode* planeNodeD = mSceneMgr->getRootSceneNode()->createChildSceneNode( "DPlaneEntity", Ogre::Vector3( 2000, 0, -2000 ) );
+	planeNodeD->attachObject( entPlaneD );
+
+	entPlaneD->setMaterialName("Examples/Rockwall");
+    entPlaneD->setCastShadows(false);
+	//========================================================================================================================
 
 	// setja inn skybox
 	mSceneMgr->setSkyBox(true, "Examples/SpaceSkyBox", 500);
 
     // Set ambient light
-    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.5f, 0.5f, 0.5f));
+    mSceneMgr->setAmbientLight(Ogre::ColourValue(0.8f, 0.8f, 0.8f));
 
     // Create a light
     Ogre::Light* l = mSceneMgr->createLight("MainLight");
@@ -87,7 +171,117 @@ void ogre_runner::createScene(void)
 	
 }
 
+bool ogre_runner::processUnbufferedInput(const Ogre::FrameEvent& evt)
+{
 
+	static bool mMouseDown = false;     // If a mouse button is depressed
+    static Ogre::Real mToggle = 0.0;    // The time left until next toggle
+    static Ogre::Real mRotate = 0.13;   // The rotate constant
+    static Ogre::Real mMove = 250;      // The movement constant
+	/*
+	bool currMouse = mMouse->getMouseState().buttonDown(OIS::MB_Left);
+	if (currMouse && ! mMouseDown)
+	{
+		Ogre::Light* light = mSceneMgr->getLight("pointLight");
+		light->setVisible(! light->isVisible());
+	}
+
+	mMouseDown = currMouse;
+
+	mToggle -= evt.timeSinceLastFrame;
+
+	if ((mToggle < 0.0f ) && mKeyboard->isKeyDown(OIS::KC_1))
+	{
+		mToggle  = 0.5;
+		Ogre::Light* light = mSceneMgr->getLight("pointLight");
+		light->setVisible(! light->isVisible());
+	}
+	*/
+	Ogre::Vector3 transVector = Ogre::Vector3::ZERO;
+	if (mKeyboard->isKeyDown(OIS::KC_K)) // Forward
+	{
+		transVector.z -= mMove;
+	}
+	if (mKeyboard->isKeyDown(OIS::KC_I)) // Backward
+	{
+		transVector.z += mMove;
+	}
+	if (mKeyboard->isKeyDown(OIS::KC_J)) // Left - yaw or strafe
+	{
+		if(mKeyboard->isKeyDown( OIS::KC_LSHIFT ))
+		{
+			// Yaw left
+			mSceneMgr->getSceneNode("NinjaNode")->yaw(Ogre::Degree(mRotate * 5));
+		} else {
+			transVector.x -= mMove; // Strafe left
+		}
+	}
+	if (mKeyboard->isKeyDown(OIS::KC_L)) // Right - yaw or strafe
+	{
+		if(mKeyboard->isKeyDown( OIS::KC_LSHIFT ))
+		{
+			// Yaw right
+			mSceneMgr->getSceneNode("NinjaNode")->yaw(Ogre::Degree(-mRotate * 5));
+		} else {
+        transVector.x += mMove; // Strafe right
+		}
+	}
+	/*
+	if (mKeyboard->isKeyDown(OIS::KC_U)) // Up
+	{
+		transVector.y += mMove;
+	}
+	if (mKeyboard->isKeyDown(OIS::KC_O)) // Down
+	{
+		transVector.y -= mMove;
+	}
+	*/
+	mSceneMgr->getSceneNode("NinjaNode")->translate(transVector * evt.timeSinceLastFrame, Ogre::Node::TS_LOCAL);
+
+
+	return true;///---
+}
+
+bool ogre_runner::frameRenderingQueued(const Ogre::FrameEvent& evt)
+{
+    bool ret = BaseApplication::frameRenderingQueued(evt);
+ 
+    if(!processUnbufferedInput(evt)) return false;
+	
+	if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,1500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,1501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(-2000,0,2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,2500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,2501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(2000,0,-2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,1500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,1501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(-2000,0,-2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,2500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,2501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(2000,0,-2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,-2500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,-2501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(2000,0,2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,-1500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(2000,0,-1501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(-2000,0,-2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,-2500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,-2501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(-2000,0,2000);
+	}
+	else if(mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,-1500) || mSceneMgr->getSceneNode("NinjaNode")->getPosition() == Ogre::Vector3(-2000,0,-1501))
+	{
+		mSceneMgr->getSceneNode("NinjaNode")->setPosition(0,0,0);
+	}
+    return ret;
+}
 
 #if OGRE_PLATFORM == OGRE_PLATFORM_WIN32
 #define WIN32_LEAN_AND_MEAN
